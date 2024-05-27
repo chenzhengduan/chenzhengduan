@@ -26,7 +26,7 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/macOS-000000?logo=macOS&logoColor=FFFFFF">
   <img alt="Static Badge" src="https://img.shields.io/badge/Linux-FCC624?logo=Linux&logoColor=FFFFFF">
   <img alt="Static Badge" src="https://img.shields.io/badge/Google Chrome-4285F4?logo=Google Chrome&logoColor=FFFFFF">
-  <img alt="Static Badge" src="https://img.shields.io/badge/Java-F7DF1E?logo=Java&logoColor=FFFFFF">
+  <img alt="Static Badge" src="https://img.shields.io/badge/Java-F7DF1E?logo=springboot&logoColor=FFFFFF">
 </p>
 
 ![img](./assets/header.png)
