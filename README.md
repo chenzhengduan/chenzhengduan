@@ -36,3 +36,6 @@
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=chenzhengduan&theme=vue&layout=compact&disable_animations=true)](https://github.com/anuraghazra/github-readme-stats)
 
 [![Harlok's wakatime stats](https://github-readme-stats.vercel.app/api/wakatime?username=chenzhengduan&theme=vue&disable_animations=true)](https://github.com/anuraghazra/github-readme-stats)
+
+## Visitor Count
+![Visitor Count](https://profile-counter.glitch.me/chenzhengduan/count.svg)
