@@ -2,7 +2,7 @@
 
 <h1 align="center">👋 I'm Zhengduan.</h1>
 
-👋 **I am a full-stack developer specializing in front-end development with Vue.js and back-end development with Java Spring Boot. Additionally, I have hands-on experience with technologies such as Three.js 🌟 and Node.js 🚀. I excel at problem-solving and am open to remote work opportunities.** 💼
+👋 **I am a full-stack developer specializing in front-end development with Vue.js and back-end development with Spring Boot (Java). Additionally, I have hands-on experience with technologies such as Three.js 🌟 and Node.js 🚀. I excel at problem-solving and am open to remote work opportunities.** 💼
 
 
 ![img](./profile-3d-contrib/profile-green-animate.svg)
