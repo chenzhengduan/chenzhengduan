@@ -1,5 +1,10 @@
 <h1 align="center"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&color=4FC08D&center=true&vCenter=true&random=false&width=500&lines=Hi+everyone+%F0%9F%91%8B+Welcome+to+my+GitHub" alt="Typing SVG" /></h1>
 
+<h1 align="center">Hi👋 I'm Zhengduan.</h1>
+
+👋 **I am a full-stack developer specializing in front-end development with Vue.js and back-end development with Java Spring Boot. Additionally, I have hands-on experience with technologies such as Three.js 🌟 and Node.js 🚀. Open to remote work opportunities.** 💼
+
+
 ![img](./profile-3d-contrib/profile-green-animate.svg)
 
 ## 🛠️ Tech & Tools Preference
