@@ -13,7 +13,7 @@ fetch(notionUrl, {
 })
 .then(response => response.json())
 .then(data => {
-  console.log('API response:', data); // 打印 API 响应数据以进行调试
+  console.log('API response:', JSON.parse(JSON.stringify(data))); // 打印 API 响应数据以进行调试
   if (!data.results) {
     throw new Error('No results found in API response');
   }
@@ -24,7 +24,11 @@ fetch(notionUrl, {
   blocks.forEach(block => {
     if (block.type === 'paragraph') {
       markdownContent += block.paragraph.text.map(text => text.plain_text).join('') + '\n\n';
-    }
+    } else if (block.type === 'to_do') {
+    // Add support for 'to_do' block type
+    const checkbox = block.to_do.checked ? '[x]' : '[ ]';
+    markdownContent += `${checkbox} ${block.to_do.text.map(text => text.plain_text).join('')}\n`;
+  }
   });
 
   // 企业微信 Webhook 发送消息
