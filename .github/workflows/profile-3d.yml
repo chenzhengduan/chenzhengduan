@@ -36,8 +36,7 @@ jobs:
             const message = {
               msgtype: 'text',
               text: {
-                content: '这是通过企业微信机器人发送的消息',
-                mentioned_list: ['@all']
+                content: '来自github:更新成功',
               }
             };
             fetch(webhookUrl, {
