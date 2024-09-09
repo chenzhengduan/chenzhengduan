@@ -25,10 +25,12 @@ fetch(notionUrl, {
     if (block.type === 'paragraph') {
       console.log("block.paragraph",block.paragraph);
        console.log("block.paragraph.text",block.paragraph.rich_text)
-      markdownContent += block.paragraph.rich_text.map(text => text.plain_text).join('') + '\n\n';
+      if(block.paragraph.rich_text&&block.paragraph.rich_text.length){
+      markdownContent += block.paragraph.rich_text.map(text => text.plain_text).join('') + '\n';
+      }
     } else if (block.type === 'to_do') {
     // Add support for 'to_do' block type
-    const checkbox = block.to_do.checked ? '[x]' : '[ ]';
+    const checkbox = block.to_do.checked ? '[已解决]' : '[待]';
     markdownContent += `${checkbox} ${block.to_do.rich_text.map(text => text.plain_text).join('')}\n`;
   }
   });
