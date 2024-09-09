@@ -24,3 +24,36 @@ jobs:
           git add -A .
           git commit -m "generated"
           git push
+          
+      # 发送消息到企业微信机器人
+      - name: Send message to WeChat Work
+        run: |
+          sudo apt-get install -y nodejs npm  # 安装 node 和 npm
+          npm install node-fetch@2            # 安装 node-fetch v2
+          node -e "
+            const fetch = require('node-fetch');
+            const webhookUrl = 'http://111.230.107.130:8005/tansci/auth/webhook?key=2abc957c-2501-4467-9220-6efc5f12228e';
+            const message = {
+              msgtype: 'text',
+              text: {
+                content: '这是通过企业微信机器人发送的消息',
+                mentioned_list: ['@all']
+              }
+            };
+            fetch(webhookUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(message)
+            })
+            .then(response => response.json())
+            .then(data => {
+              if (data.errcode === 0) {
+                console.log('消息发送成功');
+              } else {
+                console.log('消息发送失败', data);
+              }
+            })
+            .catch(error => {
+              console.error('请求失败', error);
+            });
+          "
