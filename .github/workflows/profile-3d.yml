@@ -10,13 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     name: generate-github-profile-3d-contrib
     steps:
+      # 第一步：从仓库中检出代码
       - uses: actions/checkout@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # 第二步：生成 GitHub 3D Profile 贡献图
       - uses: yoshi389111/github-profile-3d-contrib@0.7.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           USERNAME: ${{ github.repository_owner }}
+
+      # 第三步：提交并推送更新
       - name: Commit & Push
         run: |
           git config user.name chenzhengduan
@@ -24,35 +29,70 @@ jobs:
           git add -A .
           git commit -m "generated"
           git push
-          
-      # 发送消息到企业微信机器人
-      - name: Send message to WeChat Work
+
+      # 第四步：安装 Node.js 和 npm
+      - name: Install Node.js and npm
         run: |
-          sudo apt-get install -y nodejs npm  # 安装 node 和 npm
-          npm install node-fetch@2            # 安装 node-fetch v2
+          sudo apt-get install -y nodejs npm
+          npm install node-fetch@2
+
+      # 第五步：获取 Notion 页面内容并发送到企业微信机器人
+      - name: Fetch Notion Page and Send to WeChat Work
+        run: |
           node -e "
             const fetch = require('node-fetch');
-            const webhookUrl = 'http://111.230.107.130:8005/tansci/auth/webhook?key=2abc957c-2501-4467-9220-6efc5f12228e';
-            const message = {
-              msgtype: 'text',
-              text: {
-                content: '来自github:更新成功',
-              }
-            };
-            fetch(webhookUrl, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(message)
+            
+            // Notion API 请求
+            const notionToken = 'secret_nQaS11XErjplQlmTWzy1g1Gq5ZvY0IUh4pQLaxfwpWY';  // Notion token
+            const pageId = '98468c08108e4de58fbb2152c66ce2f3';  // Notion 页面 ID
+            const notionUrl = `https://api.notion.com/v1/blocks/${pageId}/children`;
+            
+            fetch(notionUrl, {
+              method: 'GET',
+              headers: {
+                'Authorization': `Bearer ${notionToken}`,
+                'Notion-Version': '2022-06-28',
+                'Content-Type': 'application/json',
+              },
             })
             .then(response => response.json())
             .then(data => {
-              if (data.errcode === 0) {
-                console.log('消息发送成功');
-              } else {
-                console.log('消息发送失败', data);
-              }
+              // 提取页面内容并转换为 Markdown
+              const blocks = data.results;
+              let markdownContent = '';
+              blocks.forEach(block => {
+                if (block.type === 'paragraph') {
+                  markdownContent += block.paragraph.text.map(text => text.plain_text).join('') + '\n\n';
+                }
+              });
+              
+              // 企业微信 Webhook 发送消息
+              const webhookUrl = 'http://111.230.107.130:8005/tansci/auth/webhook?key=2abc957c-2501-4467-9220-6efc5f12228e';
+              const message = {
+                msgtype: 'text',
+                text: {
+                  content: `Notion 页面内容：\n${markdownContent}`,
+                },
+              };
+              
+              fetch(webhookUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(message)
+              })
+              .then(response => response.json())
+              .then(data => {
+                if (data.errcode === 0) {
+                  console.log('消息发送成功');
+                } else {
+                  console.log('消息发送失败', data);
+                }
+              })
+              .catch(error => {
+                console.error('请求失败', error);
+              });
             })
             .catch(error => {
-              console.error('请求失败', error);
+              console.error('获取 Notion 内容失败', error);
             });
           "
