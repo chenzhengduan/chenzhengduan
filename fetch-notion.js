@@ -24,8 +24,8 @@ fetch(notionUrl, {
   blocks.forEach(block => {
     if (block.type === 'paragraph') {
       console.log("block.paragraph",block.paragraph);
-       console.log("block.paragraph.text",block.paragraph.text)
-      markdownContent += block.paragraph.text.map(text => text.plain_text).join('') + '\n\n';
+       console.log("block.paragraph.text",block.paragraph.rich_text)
+      markdownContent += block.paragraph.rich_text.map(text => text.plain_text).join('') + '\n\n';
     } else if (block.type === 'to_do') {
     // Add support for 'to_do' block type
     const checkbox = block.to_do.checked ? '[x]' : '[ ]';
