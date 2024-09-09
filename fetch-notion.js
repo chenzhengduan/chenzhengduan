@@ -13,6 +13,11 @@ fetch(notionUrl, {
 })
 .then(response => response.json())
 .then(data => {
+  console.log('API response:', data); // 打印 API 响应数据以进行调试
+  if (!data.results) {
+    throw new Error('No results found in API response');
+  }
+
   // 提取页面内容并转换为 Markdown
   const blocks = data.results;
   let markdownContent = '';
