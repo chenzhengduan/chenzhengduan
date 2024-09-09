@@ -28,8 +28,8 @@ fetch(notionUrl, {
     // Add support for 'to_do' block type
     const checkbox = block.to_do.checked ? '[x]' : '[ ]';
       console.log("block.to_do",block.to_do)
-      console.log("block.to_do.text",block.to_do.text);
-    markdownContent += `${checkbox} ${block.to_do.text.map(text => text.plain_text).join('')}\n`;
+      console.log("block.to_do.text",block.to_do.rich_text);
+    markdownContent += `${checkbox} ${block.to_do.rich_text.map(text => text.plain_text).join('')}\n`;
   }
   });
 
