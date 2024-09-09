@@ -39,4 +39,4 @@ jobs:
       # 第五步：获取 Notion 页面内容并发送到企业微信机器人
       - name: Fetch Notion Page and Send to WeChat Work
         run: |
-          node fetch-notion.js
+          node ./fetch-notion.js
